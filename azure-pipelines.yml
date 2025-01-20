@@ -30,7 +30,7 @@ steps:
 - script: npm run build
   displayName: 'Build Application'
 
-- script: snyk test
+- script: snyk test -d
   displayName: 'Run snyk security tests'
   
 
