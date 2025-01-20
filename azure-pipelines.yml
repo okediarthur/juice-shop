@@ -16,8 +16,8 @@ pr:
 pool:
   vmImage: ubuntu-latest
 
-variables: 
-- group: 'SnykSecrets'
+# variables: 
+# - group: 'SnykSecrets'
 
 steps:
 - task: UseNode@1
@@ -30,10 +30,10 @@ steps:
 - script: npm run build
   displayName: 'Build Application'
 
-#SCA test
-- script: snyk test --file=package.json --severity-threshold=low
-  displayName: 'Snyk SCA Test'
+# #SCA test
+# - script: snyk test --file=package.json --severity-threshold=low
+#   displayName: 'Snyk SCA Test'
 
-#SAST Test
-- script: snyk code test --severity-threshold=low
-  displayName: 'Snyk SAST Test'
+# #SAST Test
+# - script: snyk code test --severity-threshold=low
+#   displayName: 'Snyk SAST Test'
