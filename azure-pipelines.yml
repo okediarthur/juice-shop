@@ -16,13 +16,17 @@ pr:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-# # - task: UseNode@1
-# #   inputs:
-# #     version: '18.x'
+variables:
+  system.debug: true #Debug logging
 
-# # - script: npm install
-# #   displayName: 'Install Dependencies'
+steps:
+- task: UseNode@1
+  inputs:
+    version: '18.x'
+  displayName: 'Setup Node.js'
+
+- script: npm install
+  displayName: 'Install Dependencies'
 
 # - script: npm run build
 #   displayName: 'Build Application'
