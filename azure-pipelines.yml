@@ -4,18 +4,36 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- master
+  branches:
+    include:
+      - master #main
+
+pr:
+  branches:
+    include:
+      - master #main
 
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '20.x'
-  displayName: 'Install Node.js'
+variables: 
+- group: 'SnykSecrets'
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+steps:
+- task: UseNode@1
+  inputs:
+    version: '18.x'
+
+- script: npm install
+  displayName: 'Install Dependencies'
+
+- script: npm run build
+  displayName: 'Build Application'
+
+#SCA test
+- script: snyk test --file=package.json --severity-threshold=low
+  displayName: 'Snyk SCA Test'
+
+#SAST Test
+- script: snyk code test --severity-threshold=low
+  displayName: 'Snyk SAST Test'
