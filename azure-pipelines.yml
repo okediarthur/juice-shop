@@ -16,28 +16,28 @@ pr:
 pool:
   vmImage: ubuntu-latest
 
-# variables: 
-# - group: 'SnykSecrets'
-
 steps:
-# - task: UseNode@1
-#   inputs:
-#     version: '18.x'
+# # - task: UseNode@1
+# #   inputs:
+# #     version: '18.x'
 
-# - script: npm install
-#   displayName: 'Install Dependencies'
+# # - script: npm install
+# #   displayName: 'Install Dependencies'
 
-- script: npm run build
-  displayName: 'Build Application'
+# - script: npm run build
+#   displayName: 'Build Application'
 
-- script: snyk test -d
-  displayName: 'Run snyk security tests'
+# - script: snyk test -d
+#   displayName: 'Run snyk security tests'
   
 
-# #SCA test
-# - script: snyk test --file=package.json --severity-threshold=low
-#   displayName: 'Snyk SCA Test'
+- task: SnykSecurityScan@1
+  inputs:
+    serviceConnectionEndpoint: 'snyk'
+    testType: 'app'
+    monitorWhen: 'always'
+    failOnIssues: true
+    projectName: 'juice-shop'
+    organization: 'NSSF Group'
+    
 
-# #SAST Test
-# - script: snyk code test --severity-threshold=low
-#   displayName: 'Snyk SAST Test'
