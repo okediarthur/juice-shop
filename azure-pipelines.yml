@@ -20,12 +20,12 @@ pool:
 # - group: 'SnykSecrets'
 
 steps:
-- task: UseNode@1
-  inputs:
-    version: '18.x'
+# - task: UseNode@1
+#   inputs:
+#     version: '18.x'
 
-- script: npm install
-  displayName: 'Install Dependencies'
+# - script: npm install
+#   displayName: 'Install Dependencies'
 
 - script: npm run build
   displayName: 'Build Application'
