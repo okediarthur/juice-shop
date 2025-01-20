@@ -30,6 +30,10 @@ steps:
 - script: npm run build
   displayName: 'Build Application'
 
+- script: snyk test
+  displayName: 'Run snyk security tests'
+  
+
 # #SCA test
 # - script: snyk test --file=package.json --severity-threshold=low
 #   displayName: 'Snyk SCA Test'
